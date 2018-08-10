@@ -17,10 +17,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from blog.feeds import AllPostsRssFeed
 
+from users import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('blog.urls')), 
-    url(r'', include('comments.urls')),
+    url(r'^users/', include('users.urls')),
+    url(r'^users/', include('django.contrib.auth.urls')),
+    # url(r'', include('blog.urls')), 
+    # url(r'', include('comments.urls')),
     url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
     url(r'^search/', include('haystack.urls')),
+    # 测试登录主页
+    url(r'^$', views.index, name='index'),
+
 ]
