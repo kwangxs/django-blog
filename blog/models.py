@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.html import strip_tags
+from django.conf import settings
 import markdown
 
 
@@ -38,7 +39,8 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
 
     # 文章作者，一对多的关系
-    author = models.ForeignKey(User)
+    # author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     # 新增views字段记录阅读数量
     views = models.PositiveIntegerField(default=0)

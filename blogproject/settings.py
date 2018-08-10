@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'blog',
     'comments',
     'haystack',
@@ -132,3 +133,19 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 用户注册
+AUTH_USER_MODEL = 'users.User'
+
+# 登录，注销跳转url设置
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
+# 重置密码，发送邮件
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# 验证用户名和邮箱登录
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'users.backends.EmailBackend',  # 新加邮箱登录
+)
